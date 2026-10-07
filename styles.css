@@ -1,0 +1,180 @@
+:root {
+  --blue: #1b2ce0;
+  --blue-deep: #1422b8;
+  --white: #f4f4ef;
+  --white-dim: rgba(244, 244, 239, 0.72);
+  --line: rgba(244, 244, 239, 0.22);
+  --orange: #ff6a2b;
+
+  --font: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  --gutter: clamp(16px, 3.5vw, 48px);
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html, body { margin: 0; }
+
+body {
+  background: var(--blue);
+  color: var(--white);
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection { background: var(--orange); color: var(--blue-deep); }
+
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  max-width: 1480px;
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.label {
+  font-size: 12px;
+  font-weight: 500;
+  font-stretch: 112%;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* Top bar */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0;
+}
+
+/* Hero */
+.hero {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  align-items: start;
+  gap: clamp(32px, 6vw, 96px);
+  padding: clamp(48px, 9vh, 120px) 0 clamp(48px, 8vh, 96px);
+}
+
+h1 {
+  margin: 0;
+  font-size: clamp(2.75rem, 6.4vw, 6.25rem);
+  font-weight: 700;
+  font-stretch: 78%;
+  line-height: 0.92;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+/* Block visual */
+.blocks {
+  display: grid;
+  grid-template-columns: repeat(var(--cols, 10), 1fr);
+  gap: 6px;
+  width: 100%;
+  max-width: 520px;
+  justify-self: end;
+}
+
+.blocks span {
+  aspect-ratio: 1;
+  border: 1px solid var(--line);
+}
+
+.blocks .on {
+  border-color: transparent;
+  background: var(--white);
+  opacity: 0;
+  transform: translateY(-14px);
+  animation: drop 0.45s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+.blocks .top { background: var(--orange); }
+
+@keyframes drop {
+  to { opacity: 1; transform: none; }
+}
+
+/* Principles */
+.principles {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--line);
+}
+
+.principles article {
+  padding: 20px 24px 36px 0;
+}
+
+.principles article + article {
+  padding-left: 24px;
+  border-left: 1px solid var(--line);
+}
+
+.principles .label { color: var(--orange); }
+
+.principles h2 {
+  margin: 14px 0 6px;
+  font-size: 1.375rem;
+  font-weight: 600;
+  font-stretch: 90%;
+  letter-spacing: -0.005em;
+}
+
+.principles p {
+  margin: 0;
+  color: var(--white-dim);
+}
+
+/* Giant wordmark */
+.mark {
+  margin: clamp(24px, 5vh, 56px) 0 0;
+  line-height: 0;
+}
+
+.mark svg { width: 100%; height: auto; display: block; }
+
+.mark text {
+  font-family: var(--font);
+  font-size: 170px;
+  font-weight: 800;
+  font-stretch: 62%;
+  fill: var(--white);
+}
+
+/* Footer */
+.footer {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 18px 0 24px;
+  color: var(--white-dim);
+}
+
+@media (max-width: 900px) {
+  .hero { grid-template-columns: 1fr; align-items: start; }
+  .blocks { justify-self: start; max-width: 360px; }
+
+  .principles { grid-template-columns: 1fr; }
+  .principles article,
+  .principles article + article {
+    padding: 18px 0 24px;
+    border-left: 0;
+  }
+  .principles article + article { border-top: 1px solid var(--line); }
+}
+
+@media (max-width: 480px) {
+  .blocks { gap: 4px; }
+  .footer { flex-direction: column; gap: 4px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blocks .on { animation: none; opacity: 1; transform: none; }
+}

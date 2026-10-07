@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Thugosaurus</title>
+  <meta name="description" content="Thugosaurus is building new software for the enterprise. More soon.">
+  <meta name="theme-color" content="#1b2ce0">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,300..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page">
+    <header class="topbar">
+      <span class="label">Thugosaurus</span>
+    </header>
+
+    <main class="hero">
+      <div class="copy">
+        <h1>We&rsquo;re building something great.</h1>
+      </div>
+
+      <div class="blocks" id="blocks" aria-hidden="true"></div>
+    </main>
+
+    <section class="principles" aria-label="How we work">
+      <article>
+        <span class="label">01</span>
+        <h2>Fewer, better things</h2>
+        <p>A focused product, done exceptionally well.</p>
+      </article>
+      <article>
+        <span class="label">02</span>
+        <h2>Built to last</h2>
+        <p>Secure, dependable foundations come first.</p>
+      </article>
+      <article>
+        <span class="label">03</span>
+        <h2>In close partnership</h2>
+        <p>Shaped with the people who will use it.</p>
+      </article>
+    </section>
+
+    <div class="mark" aria-hidden="true">
+      <svg viewBox="0 0 1000 150" preserveAspectRatio="xMidYMax meet">
+        <text x="0" y="142" textLength="1000" lengthAdjust="spacingAndGlyphs">THUGOSAURUS</text>
+      </svg>
+    </div>
+
+    <footer class="footer">
+      <span class="label">&copy; <span id="year">2026</span> Thugosaurus</span>
+      <span class="label">All rights reserved</span>
+    </footer>
+  </div>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Rising block structure: fills column by column, bottom-up.
+    (function () {
+      var heights = [2, 3, 3, 4, 5, 5, 6, 7, 7, 8];
+      var rows = 8, cols = heights.length;
+      var el = document.getElementById('blocks');
+      el.style.setProperty('--cols', cols);
+      for (var r = 0; r < rows; r++) {
+        for (var c = 0; c < cols; c++) {
+          var cell = document.createElement('span');
+          var level = rows - r;              // 1 = bottom row
+          if (level <= heights[c]) {
+            cell.className = 'on';
+            cell.style.animationDelay = (c * 90 + level * 60) + 'ms';
+            if (c === cols - 1 && level === heights[c]) cell.className += ' top';
+          }
+          el.appendChild(cell);
+        }
+      }
+    })();
+  </script>
+</body>
+</html>
